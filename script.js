@@ -10,6 +10,7 @@ console.log(characters);//j'affiche le mot Hello world dans la console en dans u
 
 function translateLatinCharacter(){
     const latinToMorse ={
+        
         'A':'.-',
         'B':'-...',
         'C':'-.-.',
@@ -37,9 +38,9 @@ function translateLatinCharacter(){
         'Y':'-.--',
         'Z':'--..'
     }
-//     const upperCaseChar = characters.toUpperCase;
-//     return morseCode[upperCaseChar] || 'Caractère non trouvé';
-// }
+     const upperCaseChar = characters.toUpperCase;
+    return morseCode[upperCaseChar] || 'Caractère non trouvé';
+ }
 
 // const characterToTranslate ='A';
 // const morseEquivalent = translateLatinCharacter(characterToTranslate);
