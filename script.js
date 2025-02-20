@@ -1,3 +1,25 @@
+//le script sera chargé aprés que le dom est bien charger
+document.addEventListener('DOMContentLoaded', function() {
+  // Sélection des éléments
+  const inputField = document.getElementById('morse');
+  const toMorseButton = document.getElementById('tomorse');
+  const toTextButton = document.getElementById('totext');
+  const outputField = document.getElementById('output');
+
+  // Ajout des écouteurs d'événements
+  toMorseButton.addEventListener('click', function() {
+      const input = inputField.value;
+      const result = encode(input);
+      outputField.value = result;
+  });
+
+  toTextButton.addEventListener('click', function() {
+      const input = inputField.value;
+      const result = decode(input);
+      outputField.value = result;
+  });
+});
+
 function getLatinCharacterList(text) {
   return text.split(""); //je converti les cheine de character
   //en tableau de cheine de character  avec la methode split('')
@@ -42,36 +64,34 @@ function translateLatinCharacter(characters) {
 
 const Ma_Lettre = "A"; // je stock la à tradure
 const resulta = translateLatinCharacter(Ma_Lettre); //j'appel m'a fonction en lu mettant en parametre la variable qui stock "A"
-console.log(resulta);
+
 
 // Vérification du caractére
 if (resulta === ".-") {
-  console.log(resulta, "et la bon caractére !");
+  console.log(resulta, "et la bonne caractére !");
 } else {
   console.log("échoué...");
 }
 console.log(translateLatinCharacter("A"));
-console.log(translateLatinCharacter("a"));
 
 function encode(text2) {
+  if (!text2) return "";
   const characters = getLatinCharacterList(text2);
   const equivalantMors = characters
     .map((char) => translateLatinCharacter(char))
     .join(" ");
-  console.log(equivalantMors);
+  return equivalantMors; //retourne le resulta
 }
-encode();
+
 
 function getMorseCharacterList(text3) {
-  //Séparer les mots par des slashs
+  //Sépare les mots par des slashs
   const morseWords = text3.split(" / ");
   // Pour chaque mot, séparer les lettres par des espaces
   return morseWords.map((word) => word.split(" "));
 }
 
-// const text3 = "'-','---','-','---'";
-// const character3 = getMorseCharacterList(text3);
-// console.log(character3);
+
 
 function translateMorseCharacter(morseChar) {
   const morseToLatin = {
@@ -107,13 +127,13 @@ function translateMorseCharacter(morseChar) {
   // Retourner la lettre correspondante ou une chaîne vide si non trouvé
 }
 
-function decode(){
-const morseMessage = "... .- .-.. ..- - / -.-. .- /  ...- .- /";//je stock le mot Salut en morse
-const morseCharacterList = getMorseCharacterList(morseMessage);
-console.log(morseCharacterList);
-const decodedMessage = morseCharacterList
-  .map((word) => word.map((char) => translateMorseCharacter(char)).join(""))//convertit chaque caractère morse en sa lettre latine correspondante et les fusuonne
-  .join(" "); //fusuonne les motavec une espace
-console.log(decodedMessage); // salut ca va
+function decode(morseMessage) {
+  if (!morseMessage) return '';
+  const morseCharacterList = getMorseCharacterList(morseMessage);
+  const decodedMessage = morseCharacterList
+    .map((word) => word.map((char) => translateMorseCharacter(char)).join("")) //convertit chaque caractère morse en sa lettre latine correspondante et les fusuonne
+    .join(" "); //fusuonne les mots avec une espace
+    return decodedMessage
 }
-decode("...")
+
+
